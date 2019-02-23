@@ -1,0 +1,92 @@
+
+{{#if user}}
+    <div>
+        <h5> {{count}} Subjects
+        <!-- Load Data Button -->
+        <form action="/data/dataloader" method="post" id="dataloader">
+            <button  class="btn btn-success" type="submit">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                Load Data</button>
+                               
+        </form>
+        <form action="/data/delete" method="post" id="delall">
+            <input type="hidden" name="subject" value="ALL">
+            <button  class="btn btn-success" type="submit">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                Delete All</button>
+                               
+        </form>
+        </h5>
+    </div>
+    <hr>
+    <div class="container-fluid" >    
+        {{#each result}}
+            <details id="{{this.name}}">
+                <summary>
+                    <span class="text-uppercase">
+                        {{this.name}}
+                    </span> 
+                    (
+                    <span class="text-primary">
+                        <a href="/courses/{{this.name}}">
+                            {{this.courses.length}} videos
+                        </a> 
+                    </span>
+                    ) 
+                
+                
+                </summary>
+                <!-- Portfolio Item Row -->
+                {{#each this.courses}}
+                <div class="row border  p-1 mb-1">
+
+                    <div class="col-md-3">
+                    <img class="img-fluid rounded" src="https://via.placeholder.com/250/0000FF/ffffff?Text={{this.filename}}" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                    <h3 class="my-3">{{this.filename}}</h3>
+                    <p>{{this.dscription}}</p>
+                    <h3 class="my-3">Course Details
+                        <span>
+                            <form action="/data/delete" method="post" class="delform">
+                                <input type="hidden" name="subject" value="{{../this.name}}">
+                                
+                                <button  class=" btn btn-danger btn-sm" type="submit">Delete Subject</button>
+                                
+                            </form>
+                            <form action="/data/delete" method="post" class="delform">
+                                <input type="hidden" name="subject" value="{{../this.name}}">
+                                <input type="hidden" name="id" value="{{this._id}}" >
+                                <button class="btn btn-sm btn-warning" type="submit">Delete Course</button>
+                            
+                            </form>
+                        </span>
+                    </h3>
+                    <ul>
+                        <li>Category: {{../this.name}}</li>
+                        <li>Author: {{this.author}}</li>
+                        <li>Duration:<small class="text-muted">{{this.duration}}</small></li>
+                        <li>Description:{{this.description}}</li>
+                        <li>Id:{{this._id}} 
+                           
+                        </li>
+                        
+                    </ul>
+                   
+                    </div>
+
+                </div>
+                {{/each}}
+               
+            </details> 
+        {{/each}}
+    </div>
+        
+{{else}}
+     <div class="alert alert-danger">Please login</div>S
+{{/if}}
+
+<!-- google params example 
+     https://admin.google.com/torama.ng/AdminHome#DomainSettings/notab=1&subtab=subscriptions 
+     -->

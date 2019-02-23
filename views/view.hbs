@@ -1,0 +1,34 @@
+  <h3>{{ videoTitle }}</h3>
+
+<p> # of Videos {{{videoFiles.length }}} </p>
+{{#if user}}
+<div class="row justify-content-lg-start justify-content-md-start">
+    {{# each videoFiles }}
+        <div class="col-md-4 col-lg-3 col-sm-12">
+          <div class="card mb-3 shadow-sm">
+            <video class="bd-placeholder-img card-img-top" id="video-{{@index}}"
+            controls onloadeddata="setDuration({{@index}})" src="{{ this}}" 
+                type="video/mp4"> 
+                Your browser does not support video html 5 video tag
+                </video>
+            <div class="card-body">
+              <p class="card-text">{{{formatMe this}}}</p> <!-- formatMe is a custom helper -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted" id="vid-{{@index}}"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+            
+            
+    {{/each}}
+</div>
+{{else}}
+     <div class="alert alert-danger">Please login</div>
+     
+{{/if}}
+

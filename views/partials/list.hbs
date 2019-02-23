@@ -1,0 +1,58 @@
+
+{{#each children}}
+    <li ><span class="caret">
+        {{this.name}}
+        </span>
+        {{#equal this.type 'file'}}
+        <div class="row">
+            <div class="col-xs-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p><img class="img-fluid schimg" src="/images/school/{{formatMe this.name}}.png" alt="card image"></p>
+                            <p class="card-title">{{formatMe this.name}}</p>  
+                            <button class="btn-primary playbutton" id="{{this.path}}">  Play Video</button>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+        {{/equal}}
+        
+        {{#if this.children}}
+            {{#if this.children.length}}
+              (<a href="#">{{this.children.length }} Children
+              </a>) <i class="fa fa-folder"></i>
+            {{/if}}
+            <ul  class="nested">
+                {{>list}}
+            </ul>
+        {{/if}}
+    </li>
+{{/each}}
+
+<script>
+
+    var playbutton = document.getElementsByClassName("playbutton");
+    var i
+
+    for (i = 0; i < playbutton.length; i++) {
+        playbutton[i].addEventListener("click", function() {
+            mp4 = this.id;
+            
+            let cindex = mp4.indexOf('videos');
+            mp4len = mp4.length;
+            vidlen = 'videos'.length;
+            sublen = cindex + vidlen;
+            let folder = mp4.substring(sublen, mp4len)
+
+            video = document.getElementById('videoid');  
+            let videotext = document.getElementById('videotitle');
+            let selected =  folder.toLowerCase();
+
+            videotext.innerText = selected.substring(0, selected.lastIndexOf('.'));
+            video.src = encodeURI(selected);
+            video.load();
+            video.play();
+            video.focus(); 
+        });
+    }
+</script>

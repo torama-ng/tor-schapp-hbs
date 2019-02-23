@@ -1,0 +1,51 @@
+/* Space out content a bit */
+body {
+  padding-top: 0x;
+  padding-bottom: 0px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.video-row {
+  display: flex;
+
+  flex-direction: row;
+  flex-flow:  wrap;
+  justify-content: flex-start;
+
+}
+
+.video-col {
+  flex-basis: 23%;
+  box-sizing: border-box;
+  margin: 2px;
+  padding: 1px;
+  border-radius: 10px;
+  background-color: #ffcc01;
+
+}
+
+video {
+  width:100%;
+}
+
+
+
+.schimg{
+  width:100px;
+  height: 100px;
+  border-radius: 50%;
+}
+/* p { word-break: break-all } 
+
+p.card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+*/

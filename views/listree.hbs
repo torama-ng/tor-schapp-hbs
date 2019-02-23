@@ -1,0 +1,121 @@
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: red;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+</style>
+
+
+{{#if user}}
+    <div>
+        <h5> {{count}} Subjects
+        <!-- Load Data Button -->
+        <form action="/courses/treeload" method="post" id="dataloader">
+            <button  class="btn btn-success" type="submit">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                Load Data</button>
+                               
+        </form>
+        <form action="/courses/walkdel" method="post" id="delall">
+            <input type="hidden" name="subject" value="ALL">
+            <button  class="btn btn-success" type="submit">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                Delete All</button>
+                               
+        </form>
+        </h5>
+    </div>
+    <hr>
+  <!-- Play Area-->
+  <div class="row">
+    <div class="col-md-7" >
+      Play idea
+          <div class="card">
+                <video class="bd-placeholder-img card-img-top" id="videoid"
+                    controls="controls">
+                     <source  type="video/mp4">
+                    
+                    Your browser does not support video html 5 video tag
+                </video>
+            <div class="card-body">
+              <p class="card-text" id="videotitle">{{{this.name}}}</p> <!-- formatMe is a custom helper -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted" id="vid-0"></small>
+              </div>
+            </div>
+          </div>
+       
+    </div>
+    <div class="col-md-5" id="rlist">
+      <ul id="myUL">
+          {{> list}}
+      </ul>
+
+    </div>
+  </div>
+  
+  <hr>
+  
+
+        
+{{else}}
+     <div class="alert alert-danger">Please login</div>S
+{{/if}}
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+    
+  });
+     
+ }
+
+</script>
+
+<!-- google params example 
+     https://admin.google.com/torama.ng/AdminHome#DomainSettings/notab=1&subtab=subscriptions 
+     -->

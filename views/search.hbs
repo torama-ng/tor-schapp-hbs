@@ -1,0 +1,46 @@
+
+{{#if user}}
+    
+    <div class="row container-fluid  " >
+       <div class="col w70">
+           <div class="card">
+                <video class="bd-placeholder-img card-img-top" id="videoid"
+                    controls="controls">
+                     <source  type="video/mp4">
+                    
+                    Your browser does not support video html 5 video tag
+                </video>
+            <div class="card-body">
+              <p class="card-text" id="videotitle">{{{title}}}</p> <!-- formatMe is a custom helper -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted" id="vid-0"></small>
+              </div>
+            </div>
+          </div>
+       </div>
+       
+        <div class="col w30">
+            
+            <h5 id="{{category}}"> {{category}} Play List ({{count}})</h5>
+            {{#each result}}
+            
+            <div class="card rside text-white bg-primary mb-1 " onclick="playcVideo('{{this.filename}}')">
+                <div class="card-header">{{@index}}</div>
+                <div class="card-body">
+                    <h6 class="card-title text-white">{{formatMe this.filename}}</h6>
+                    <small class="card-text text-warning">Description: </small>
+                    <small class="card-text text-warning">Duration </small>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+        
+{{else}}
+     <div class="alert alert-danger">Please login</div>
+{{/if}}
+

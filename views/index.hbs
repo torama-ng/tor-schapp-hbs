@@ -1,0 +1,40 @@
+
+{{#if user}}
+    <div class="row container-fluid">
+        <div class="col w70">
+            Play Area
+        </div>
+        <div class="col w30">
+            Select area
+        </div>
+    </div>
+    <h4>Available Course Video Categories</h4>
+    <div class="row container-fluid  " >    
+      
+        <!-- Place all category items in a Card-->
+        <!-- Category Photo and name and number of items in category-->
+        {{#each videoGroup}}
+            <a class="card-link" href="/torplay/{{this.category}}">
+               
+            <div class="card icard bg-light ml-1 px-1 mb-1   ">
+                 
+                    <div class="card_text">
+                        <h5 class="card_title">{{this.category}}</h5>
+                        <small class="card_text  text-truncate">Last updated: 
+                            <span class="text-muted">{{this.mtime}} days ago </span></small>
+                    </div>      
+                    {{#if_eq this.files.length 1}}
+                        <small class="card-text nvd text-muted ">{{this.files.length}} Video</small>
+                    {{else}}
+                        <small class="card-text nvd text-muted">{{this.files.length}} Videos</small>
+                    {{/if_eq}}
+                      
+            </div>
+            </a> 
+            
+        {{/each}}
+    </div>
+        
+{{else}}
+     <div class="alert alert-danger">Please login</div> 
+{{/if}}
