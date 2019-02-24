@@ -1,0 +1,7 @@
+*.mp4
+videos/
+node_modules/
+*.webm
+*.mp3
+*.old
+*Shortcut.lnk
