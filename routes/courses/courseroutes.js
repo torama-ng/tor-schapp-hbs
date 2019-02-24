@@ -9,15 +9,13 @@ const trim = require('deep-trim-node');
 const subjectsData = require('../../models/subject');
 const subjectsDree = require('../../models/subjectdree');
 
-const tmpPath = path.join(__dirname, '../../tmp');
-
 const videosPath = path.join(__dirname, '../../videos');
 
 router.get('/listree',(req,res,next) => {
     subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
         if (err) return res.status(404).send('Error Encountered');
         if (children) {
-            console.log(children);
+            console.log('Just testing here');
             res.render('listree', { 
                 title: 'Tree of subjects',
                 children,
@@ -36,7 +34,8 @@ router.post('/walkdel', (req,res,next) => {
 
     })
     .then(() => {
-        return res.send(' All subjectsdree  deleted');
+        res.redirect('/courses/listree');
+        // return res.send(' All subjectsdree  deleted');
     })
     .catch((err) => {
         return res.status(500).send(`${err} Error in dree Data delete`);

@@ -1,19 +1,27 @@
 
 {{#each children}}
+    
     <li ><span class="caret">
         {{this.name}}
         </span>
         {{#equal this.type 'file'}}
         <div class="row">
-            <div class="col-xs-6">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <p><img class="img-fluid schimg" src="/images/school/{{formatMe this.name}}.png" alt="card image"></p>
-                            <p class="card-title">{{formatMe this.name}}</p>  
-                            <button class="btn-primary playbutton" id="{{this.path}}">  Play Video</button>
-                        </div>
-                    </div> 
-            </div>
+            <div class="col-xs-12 bg-success" style="border-radius:20%;">
+                <a href="" class="list-group-item clearfix">
+                    <div class="pull-left">
+                        <h4 class="list-group-item-heading" id="videotitle">
+                            {{ formatMe this.name}}
+                        </h4>
+                        <p class="list-group-item-text">parag text</p>
+                    </div>
+                    <span class="pull-right">
+                        <img src="" alt="image" class="img-responsive" style="max-height: 50px;">
+                    </span>
+                    <button class="btn btn-primary playbutton" id="{{this.path}}">Play Video</button>
+                
+                </a>
+
+    </div>
         </div>
         {{/equal}}
         
@@ -27,17 +35,19 @@
             </ul>
         {{/if}}
     </li>
+   
 {{/each}}
 
 <script>
 
-    var playbutton = document.getElementsByClassName("playbutton");
-    var i
-
-    for (i = 0; i < playbutton.length; i++) {
-        playbutton[i].addEventListener("click", function() {
-            mp4 = this.id;
-            
+   
+   
+    document.addEventListener('click', function (event) {
+        mp4 = event.target.id
+        if ( event.target.classList.contains( 'playbutton' ) ) {
+            // Do something...
+            // mp4 = this.id
+            console.log( 'event id '+ mp4)
             let cindex = mp4.indexOf('videos');
             mp4len = mp4.length;
             vidlen = 'videos'.length;
@@ -46,13 +56,14 @@
 
             video = document.getElementById('videoid');  
             let videotext = document.getElementById('videotitle');
-            let selected =  folder.toLowerCase();
+            // let selected =  folder.toLowerCase();
 
             videotext.innerText = selected.substring(0, selected.lastIndexOf('.'));
             video.src = encodeURI(selected);
             video.load();
             video.play();
             video.focus(); 
-        });
-    }
+        }
+    }, true);
+
 </script>
