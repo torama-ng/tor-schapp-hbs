@@ -43,23 +43,24 @@
    
    
     document.addEventListener('click', function (event) {
-        mp4 = event.target.id
+        mp4path = event.target.id
         if ( event.target.classList.contains( 'playbutton' ) ) {
             // Do something...
             // mp4 = this.id
-            console.log( 'event id '+ mp4)
-            let cindex = mp4.indexOf('videos');
-            mp4len = mp4.length;
-            vidlen = 'videos'.length;
+            console.log( 'event id '+ mp4path)
+            let cindex = mp4path.indexOf('videos'); // index of 'videos' in path
+            let vidlen = 'videos'.length;
+            let mp4len = mp4path.length;
+            
             sublen = cindex + vidlen;
-            let folder = mp4.substring(sublen, mp4len)
+            // extract the mp4 file path from the full path
+            let url = mp4path.substring(sublen, mp4len)
 
             video = document.getElementById('videoid');  
             let videotext = document.getElementById('videotitle');
-            // let selected =  folder.toLowerCase();
-
-            videotext.innerText = selected.substring(0, selected.lastIndexOf('.'));
-            video.src = encodeURI(selected);
+            
+            videotext.innerText = url.substring(0, url.lastIndexOf('.'));
+            video.src = encodeURI(url);
             video.load();
             video.play();
             video.focus(); 
