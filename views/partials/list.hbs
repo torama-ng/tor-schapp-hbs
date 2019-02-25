@@ -1,4 +1,8 @@
-
+<style>
+.rightimg {
+ border-radius:50%;
+}
+</style>
 {{#each children}}
     
     <li ><span class="caret">
@@ -6,15 +10,14 @@
         </span>
         {{#equal this.type 'file'}}
         <div class="row">
-            <div class="col-xs-12">
+          <!--  <div class="col-xs-12">
                 <video class="bd-placeholder-img" 
                     controls="controls">
                      <source  type="video/mp4">
                     
                     Your browser does not support video html 5 video tag
                 </video>
-            </div>
-            <!--
+            </div> -->
             <div class="col-xs-12" >
 
                 <a href="" class="list-group-item clearfix">
@@ -25,7 +28,7 @@
                         <p class="list-group-item-text">parag text</p>
                     </div>
                     <span class="pull-right">
-                        <img src="/images/school/addition.png" alt="image" class="img-responsive" style="max-height: 50px;">
+                        <img src="/images/school/addition.png" alt="image" class="img-responsive rightimg" style="max-height: 50px;">
                     </span>
                    
                 
@@ -33,7 +36,6 @@
             
 
             </div>
-            -->
         </div>
         {{/equal}}
         

@@ -49,7 +49,7 @@ function playVideo(selectid) {
 }
 
 
-function playcVideo2(selectid) {
+function playcVideo(selectid) {
   let video = "";
   console.log(`play value is ${selectid}`);
 
@@ -63,10 +63,10 @@ function playcVideo2(selectid) {
   let selected = selectid;
   
   videotext.innerText = selected.substring(0, selected.lastIndexOf('.'));
-  selected = '/' + folder.toLowerCase() + '/' + selected;
+  selected = '/' + folder + '/' + selected;
   // console.log(`select id is ${selectid} selected is ${selected}`);
   // set text for video Title
-  // console.log(`selected url is ${selected} `); 
+  console.log(`selected url is ${selected} `); 
   var source = document.createElement('source');
   
   //source.setAttribute('src', encodeURI(selected));
