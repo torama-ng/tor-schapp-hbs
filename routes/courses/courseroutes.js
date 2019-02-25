@@ -15,7 +15,7 @@ router.get('/listree',(req,res,next) => {
     subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
         if (err) return res.status(404).send('Error Encountered');
         if (children) {
-            console.log('Just testing here');
+            
             res.render('listree', { 
                 title: 'Tree of subjects',
                 children,

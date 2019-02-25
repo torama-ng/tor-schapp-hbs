@@ -49,7 +49,7 @@ function playVideo(selectid) {
 }
 
 
-function playcVideo(selectid) {
+function playcVideo2(selectid) {
   let video = "";
   console.log(`play value is ${selectid}`);
 
@@ -91,49 +91,3 @@ function playcVideo(selectid) {
 // Handlebars helperS
 // substr to decorate string
 
-function populate(s1) {
-  var s1 = document.getElementById(s1);
-  var selected = s1.value;
-  var optionFolder = document.getElementById(selected);
-  var files = optionFolder.getAttribute("data-files");
-
-  // create a new select dom and populate it with files from function
-  
-  var newSelect = document.createElement("select");
-  var newOption = document.createElement("option");
-    newOption.value = "Files from function";
-    newOption.innerHTML = files;
-    newSelect.options.add(newOption);
-    var c0 = document.getElementById('col0');
-    c0.appendChild(newSelect);
-}
-
-function playVid2(path) {
-  // extract correct path
-  cindex = path.indexOf('videos')
-  let folder = path.substring(cindex+'videos'.length, path.length)
-
-  let video = "";
-  video = document.getElementById('videoid');
-  
-  let videotext = document.getElementById('videotitle');
-  // pick the id element of the select tag as folder
-    
-  selected = '/' + folder.toLowerCase();
-  
-  videotext.innerText = selected.substring(0, selected.lastIndexOf('.'));
-  
-  
-  //source.setAttribute('src', encodeURI(selected));
-  
-  //video.appendChild(source);
-  video.src = encodeURI(selected);
- 
-  video.load();
-  video.play();
-
-  // let dur = video.duration;
-  // document.getElementById('vid-0').textContent = (dur/60).toFixed(0) + " mins";
-  // document.getElementById('videoid').focus();
-  
-}
