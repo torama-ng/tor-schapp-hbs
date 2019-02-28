@@ -16,5 +16,5 @@ subjectDreeSchema.add({
   });
 // Creating a collection
 var subjectDree = mongoose.model("Subjectd", subjectDreeSchema);
-//console.log(userData);
+
 module.exports = subjectDree;

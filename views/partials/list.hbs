@@ -1,50 +1,50 @@
-<style>
-.rightimg {
- border-radius:50%;
-}
-</style>
+
 {{#each children}}
     
-    <li ><span class="caret">
+    <li id="mylist"><span class="caret">
         {{this.name}}
         </span>
         {{#equal this.type 'file'}}
         <div class="row">
-          <!--  <div class="col-xs-12">
-                <video class="bd-placeholder-img" 
-                    controls="controls">
-                     <source  type="video/mp4">
-                    
-                    Your browser does not support video html 5 video tag
-                </video>
-            </div> -->
-            <div class="col-xs-12" >
 
-                <a href="" class="list-group-item clearfix">
-                    <div class="pull-left">
-                        <h4 class="list-group-item-heading" id="videotitle">
-                            Title
-                        </h4>
-                        <p class="list-group-item-text">parag text</p>
-                    </div>
-                    <span class="pull-right">
-                        <img src="/images/school/addition.png" alt="image" class="img-responsive rightimg" style="max-height: 50px;">
-                    </span>
-                   
-                
-                </a>
-            
+            <div class="col-md-12" >
+                    <!-- Call route to show all videos in this category-->
+                <form action="/courses/path" method="post" >
+                    <input type="hidden" name="path" value="{{this.path}}">
+                    <input type="hidden" name="filename" value="{{this.name}}">
+                    <button class="btn btn-primary "> 
+                        Play Video
+                    </button>
+                </form>
+                <!-- 
+                    <a href="" class="list-group-item clearfix">
+                        <div class="pull-left">
+                            <h4 class="list-group-item-heading" id="videotitle">
+                                Title
+                            </h4>
+                            <p class="list-group-item-text">parag text</p>
+                        </div>
+                        <span class="pull-right">
+                            <img src="/images/school/addition.png" alt="image" class="img-responsive" style="max-height: 50px;">
+                        </span>    
+                    </a>
+                -->
 
             </div>
+            
         </div>
         {{/equal}}
         
         {{#if this.children}}
-            {{#if this.children.length}}
-              (<a href="#">{{this.children.length }} Children
-              </a>) <i class="fa fa-folder"></i>
+            {{#if this.children.length}} <i class="fa fa-folder"></i>
+              (
+                <a href="#">
+                {{this.children.length }} Children
+              </a>
+              )
+              
             {{/if}}
-            <ul  class="nested">
+            <ul  class="nested" id="myull">
                 {{>list}}
             </ul>
         {{/if}}

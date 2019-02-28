@@ -25,6 +25,33 @@ router.get('/listree',(req,res,next) => {
     })
 })
 
+router.post('/path',(req,res,next) => {
+    let categName;
+    let vsplit = [];
+    let vpath = req.body.path;
+    
+    if (vpath)  {
+        vsplit = vpath.split('/');
+        categName = vsplit[vsplit.length-2] 
+     //   categName = vpath.match(/([^\/]*)\/*$/)[1];
+    }
+    else res.status(404).send('vpath not good')
+    
+    let filename = req.body.filename;
+    console.log('file is '+  filename);
+    console.log('categ is '+ categName);
+    console.log('vsplit is '+ vsplit);
+    res.render('playview', { 
+        title: categName,
+        filename,
+        vpath
+        
+    });        
+    
+    
+})
+
+
 router.post('/walkdel', (req,res,next) => {
 
     if (process.env.PLATFORM != "PROD"){
@@ -93,6 +120,61 @@ router.post('/treeload', (req,res,next) => {
     
 })
 
+// find and display one subject by name - eg
+router.get('/play', ensureAuthenticated, (req,res,next) => {
+    
+    subject = req.params.path;
+    
+    subjectsData.findOne({name:subject}, (err, doc)=>{
+        if (err) error = 'Error Encountered in model findOnes';
+        else if (doc) {        
+            // sort courses
+          
+            courses = doc.courses;      
+            count = courses.length;
+            /*
+            var mapped = courses.map(function(el, i) {
+                return { index: i, value: el.filename.toLowerCase() };
+              })
+            */
+            // console.log(`before sort ${courses}`)
+            sorted_courses = courses.sort ( (a,b) => {
+                return a.toString().localeCompare(b)
+            })
+            
+            
+            sorted_courses = courses.sort( 
+                (a, b) => {
+                    if (a.filename < b.filename ) {
+                      return -1;
+                    }
+                    if (a.filename > b.filename) {
+                      return 1;
+                    }
+                    
+                    return 0;
+                  }
+            );
+            if (sorted_courses != courses) {
+                console.log('there is diff')
+            }
+            else {
+                console.log('no diff')
+            }
+
+            category = subject;
+
+            res.render('search', { 
+                title: 'Course Category',
+                category,
+                result: sorted_courses,
+                count
+            });
+        }
+    })
+})
+
+
 // List all Courses/subjects and video files under them
 router.get('/', ensureAuthenticated, (req,res,next) => {
     subq = req.query.subject;
@@ -121,7 +203,7 @@ router.get('/', ensureAuthenticated, (req,res,next) => {
 })
 
 
-// find and display one subject by name
+// find and display one subject by name - eg
 router.get('/:name', ensureAuthenticated, (req,res,next) => {
     
     subject = req.params.name;

@@ -1,3 +1,12 @@
+#mylist {
+  width: 900px;
+  font-size: 25px;
+}
+
+#myull {
+  
+}
+
 form#dataloader  {
     display:inline;
 }

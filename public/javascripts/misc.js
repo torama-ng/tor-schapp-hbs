@@ -88,6 +88,52 @@ function playcVideo(selectid) {
 }
 
 
+
+const playMe = (mpath) => {
+  mp4path = String(mpath);
+  
+  // btnid = mp4path;
+  console.log( 'path '+ mp4path)
+  if ( mp4path.indexOf('.mp4') > 0) {
+      let cindex = mp4path.indexOf('videos'); // index of 'videos' in path
+      let vidlen = 'videos'.length;
+      let mp4len = mp4path.length;
+
+      sublen = cindex + vidlen;
+      console.log(`sublen ${sublen}`)
+      // extract the mp4 file path from the full path
+      let url = mp4path.substring(sublen, mp4len)
+      console.log(`url ${url}`)
+      let video = document.getElementById('videoid');  
+      let videotext = document.getElementById('videotitle');
+      
+      videotext.innerText = url.substring(0, url.lastIndexOf('.'));
+
+      // var source = document.createElement('source');
+
+      // source.setAttribute('src', encodeURI(url));
+
+      // video.appendChild(source);
+
+
+      video.src = encodeURI(url);
+      video.load();
+      
+      video.play()
+      .then( () => {
+              console.log('playing')
+      })
+      .catch( ( err ) => {
+          console.log('play failed '+ err)
+
+      })
+      
+
+  }    
+
+}
+
+
 // Handlebars helperS
 // substr to decorate string
 

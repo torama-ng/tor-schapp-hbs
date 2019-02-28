@@ -75,9 +75,9 @@ hbs.registerHelper('if_eq', function(a, b, opts) {
 hbs.registerHelper('formatMe', function(txt) {
 
   txt = path.basename(txt,'.mp4');
-  console.log(txt);
+  // console.log(txt);
   txt = txt.replace("%", "");
-  console.log(txt);
+  // console.log(txt);
   txt =  decodeURIComponent(txt) ;
   return txt
   // return txt.substring(0, 40);
