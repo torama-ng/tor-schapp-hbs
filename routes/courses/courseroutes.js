@@ -25,22 +25,22 @@ router.get('/listree',(req,res,next) => {
     })
 })
 
-router.post('/path',(req,res,next) => {
+router.post('/play',(req,res,next) => {
     let categName;
     let vsplit = [];
     let vpath = req.body.path;
     
     if (vpath)  {
         vsplit = vpath.split('/');
-        categName = vsplit[vsplit.length-2] 
+        categName = vsplit[vsplit.length-2];  // extract subject name
+        filename =  vsplit[vsplit.length-1];
      //   categName = vpath.match(/([^\/]*)\/*$/)[1];
     }
-    else res.status(404).send('vpath not good')
+    else return res.status(404).send('vpath not good')
     
-    let filename = req.body.filename;
-    console.log('file is '+  filename);
-    console.log('categ is '+ categName);
-    console.log('vsplit is '+ vsplit);
+
+    // let filename = req.body.filename;
+
     res.render('playview', { 
         title: categName,
         filename,
