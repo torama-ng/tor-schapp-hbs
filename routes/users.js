@@ -19,6 +19,19 @@ router.get('/login', function (req, res) {
 
 });
 
+router.get('/listusers', function (req, res) {
+	console.log(req.user);
+	User.find({}).sort({name: 'asc'}).exec((err, users) => {
+		console.log(users)
+		res.render('userview', {
+			users
+		});
+	})
+	
+
+});
+
+
 // Register User
 router.post('/register', function (req, res) {
 	var name = req.body.name;

@@ -5,11 +5,10 @@ const Schema = mongoose.Schema;
 const VideoSchema = new Schema({
     name: { 
         type: String,
-        required: true
     },
-    filename: {
+    image: String,
+    path: {
         type: String,
-        required: true
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
