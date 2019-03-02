@@ -1,3 +1,3 @@
 module.exports = {
-    mongoURI:'mongodb://tor1:T0rDBpass@ds117109.mlab.com:17109/tordb1'
+    mongoURI:'mongodb://localhost:27017/torsch1'
 };

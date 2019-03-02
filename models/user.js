@@ -15,7 +15,15 @@ var UserSchema = mongoose.Schema({
 	},
 	name: {
 		type: String
-	}
+	},
+
+    activity: [{
+        path: String,
+        duration: Number,
+        act_date: { type: Date, default: Date.now },
+      
+    }]
+	
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

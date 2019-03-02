@@ -26,14 +26,27 @@
         <div class="col-md-4">
             <h5 id="{{title}}"> {{title}} Play List </h5>
             
-                <div class="card rside text-white bg-primary mb-1 " onclick="playMe('{{vpath}}')">
+                <div class="card rside text-white bg-primary mb-1 " onclick='playMe("{{vpath}}")'>
                     <div class="card-header">{{@index}}</div>
                     <div class="card-body">
-                        <h6 class="card-title text-white">{{filename}}</h6>
+                        <h6 class="card-title text-white">{{formatMe filename}}</h6>
                         <small class="card-text text-warning">Description: </small>
                         <small class="card-text text-warning">Duration </small>
                     </div>
                 </div>
+            
+                {{#each files}}
+                   
+                        <div class="card rside text-white bg-primary mb-1 " onclick='playMe("{{this.path}}")'>
+                            <div class="card-header">{{@index}}</div>
+                            <div class="card-body">
+                                <h6 class="card-title text-white">{{formatMe this.name}}</h6>
+                                <small class="card-text text-warning">Description: </small>
+                                <small class="card-text text-warning">Duration </small>
+                            </div>
+                        </div>
+                   
+                {{/each}}
         </div>
     </div>
         

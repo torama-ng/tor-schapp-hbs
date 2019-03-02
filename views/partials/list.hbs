@@ -1,60 +1,59 @@
 
-{{#each children}}
-    
-    <li id="mylist"><span class="caret">
-        {{this.name}}
-        </span>
-        {{#equal this.type 'file'}}
-        <div class="row">
+ {{#each children}}
+                
+                <li id="mylist">
+                    {{#equal this.type 'directory'}}
+                        <span class="caret">
+                            {{this.name}}
+                        </span>
+                    {{/equal}}
+                    {{#equal this.type 'file'}}
+                    <div class="row">
 
-            <div class="col-md-12" >
-                    <!-- Call route to show all videos in this category-->
-                <form action="/courses/play" method="post" >
-                    <input type="hidden" name="path" value="{{this.path}}">
-                    <input type="hidden" name="filename" value="{{this.name}}">
-                    <button class="btn btn-primary "> 
-                        Play Video
-                    </button>
-                </form>
-                <!-- 
-                    <a href="" class="list-group-item clearfix">
-                        <div class="pull-left">
-                            <h4 class="list-group-item-heading" id="videotitle">
-                                Title
-                            </h4>
-                            <p class="list-group-item-text">parag text</p>
+                        <div class="col-md-12 bg-warning border rounded p-2 m-1 filediv" >
+                            <span >
+                                <small>{{this.name}}</small>
+                            </span>
+                                <!-- Call route to show all videos in this category-->
+                            <form action="/courses/play" method="post" >
+                                <input type="hidden" name="path" value="{{this.path}}">
+                                <input type="hidden" name="filename" value="{{this.name}}">
+                                <button class="btn btn-primary "> 
+                                    Play Video
+                                </button>
+                            </form>
+                            <!-- 
+                                <a href="" class="list-group-item clearfix">
+                                    <div class="pull-left">
+                                        <h4 class="list-group-item-heading" id="videotitle">
+                                            Title
+                                        </h4>
+                                        <p class="list-group-item-text">parag text</p>
+                                    </div>
+                                    <span class="pull-right">
+                                        <img src="/images/school/addition.png" alt="image" class="img-responsive" style="max-height: 50px;">
+                                    </span>    
+                                </a>
+                            -->
+
                         </div>
-                        <span class="pull-right">
-                            <img src="/images/school/addition.png" alt="image" class="img-responsive" style="max-height: 50px;">
-                        </span>    
-                    </a>
-                -->
-
-            </div>
+                        
+                    </div>
+                    {{/equal}}
+                    
+                    {{#if this.children}}
+                        {{#if this.children.length}} <i class="fa fa-folder"></i>
+                        (
+                            <a href="#">
+                            {{this.children.length }} items
+                        </a>
+                        )
+                        
+                        {{/if}}
+                        <ul  class="nested" id="myull">
+                            {{>list}}
+                        </ul>
+                    {{/if}}
+                </li>
             
-        </div>
-        {{/equal}}
-        
-        {{#if this.children}}
-            {{#if this.children.length}} <i class="fa fa-folder"></i>
-              (
-                <a href="#">
-                {{this.children.length }} Children
-              </a>
-              )
-              
-            {{/if}}
-            <ul  class="nested" id="myull">
-                {{>list}}
-            </ul>
-        {{/if}}
-    </li>
-   
-{{/each}}
-
-<script>
-
-   
-    
-
-</script>
+            {{/each}}

@@ -1,4 +1,18 @@
 <style>
+.filediv {
+  background-color: rgba(41, 41, 38, 0.4) !important;
+   color: white !important; 
+  /* color: #ffcc01 !important; */ 
+  border-left-color: #d2002e !important;
+  border-left-width: 3px !important;
+  
+}
+.filediv:hover {
+  color: #fff !important;
+  background-color: black !important;
+  border-color: #c12e2a !important;
+}
+
 ul, #myUL {
   list-style-type: none;
 }
@@ -39,51 +53,64 @@ ul, #myUL {
 
 </style>
 
-
-{{#if user}}
-    <div>
-        <h5> {{count}} Subjects
+<!-- {{#if user}} -->
+  <div class="container ">
+    <div class="row">
+      <div class="col-xs-12 rounded w-100 border border-primary p-2">
+        <h3 class="text-right">YELA MODERN CURRICULUM ACADEMY</h3>
+        <h5> {{count}} Subjects 
         <!-- Load Data Button -->
-        <form action="/courses/treeload" method="post" id="dataloader">
-            <button  class="btn btn-success" type="submit">
-                <i class="fa fa-upload" aria-hidden="true"></i>
-                Load Data</button>
-                               
-        </form>
-        <form action="/courses/walkdel" method="post" id="delall">
-            <input type="hidden" name="subject" value="ALL">
-            <button  class="btn btn-success" type="submit">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                Delete All</button>
-                               
-        </form>
+        {{#equal user.username "admin" }}
+          <form action="/courses/treeload" method="post" id="dataloader">
+              <button  class="btn btn-success" type="submit">
+                  <i class="fa fa-upload" aria-hidden="true"></i>
+                  Load Data</button>
+                                
+          </form>
+          <form action="/courses/walkdel" method="post" id="delall">
+              <input type="hidden" name="subject" value="ALL">
+              <button  class="btn btn-danger" type="submit">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  Delete All</button>
+                                
+          </form>
+        {{/equal}}
         </h5>
-    </div>
-    <hr>
-  
-  <div class="row">
-    
-    <div class="col-md-8" id="rlist">
-      <ul id="myUL">
-          {{> list}}
-      </ul>
+        
+        <hr>
+        <div class="view" style="background-image: url('/images/school/front/architecture-chairs-conference-207715.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+          <div class="row">
+            
+            <div class="col-md-6 bg-light ml-3 pl-3" id="rlist">
+              <ul id="myUL">
+                  {{> list}}
+              </ul>
 
-    </div>
-    <div class="col-md-4" >
+            </div>
+            <div class="col-md-6" >
+              <!--
+              ​<picture>
+                <source  media="(min-width: 450px)" srcset="/images/school/front/architecture-building-chairs-207731.jpg">
+                
+                <source media="(min-width: 650px)" srcset="/images/school/front/board-room-chairs-conference-room-159805.jpg" type="image/svg+xml">
+                <img src="/images/school/front/architecture-chairs-conference-207715.jpg" class="img-fluid img-thumbnail" alt="mc2-img">
+
+                  
+              </picture> -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <hr>
-  
-
-        
+<!--
 {{else}}
      <div class="alert alert-danger">Please login</div>S
 {{/if}}
+-->
 
 
 <script>
-
 
 var toggler = document.getElementsByClassName("caret");
 
@@ -91,9 +118,10 @@ var i;
 for (i = 0; i < toggler.length; i++) {
   toggler[i].addEventListener("click", function() {
     console.log(this)
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-
+    if ( this.parentElement.querySelector(".nested")) {
+      this.parentElement.querySelector(".nested").classList.toggle("active");
+      this.classList.toggle("caret-down");
+    }
     
   });
      
@@ -102,6 +130,3 @@ for (i = 0; i < toggler.length; i++) {
 
 </script>
 
-<!-- google params example 
-     https://admin.google.com/torama.ng/AdminHome#DomainSettings/notab=1&subtab=subscriptions 
-     -->

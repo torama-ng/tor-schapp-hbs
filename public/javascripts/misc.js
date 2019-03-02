@@ -1,3 +1,5 @@
+
+
 // Set Video Duration in proper place
 
 function setDuration(indx) {  
@@ -87,9 +89,7 @@ function playcVideo(selectid) {
   
 }
 
-
-
-const playMe = (mpath) => {
+function playMe(mpath)  {
   mp4path = String(mpath);
   
   // btnid = mp4path;
@@ -112,28 +112,36 @@ const playMe = (mpath) => {
       // var source = document.createElement('source');
 
       // source.setAttribute('src', encodeURI(url));
-
       // video.appendChild(source);
-
 
       video.src = encodeURI(url);
       video.load();
       
       video.play()
       .then( () => {
-              console.log('playing')
-      })
+        console.log('playing')
+        // save play incident touser record
+
+        fpath = '/clicked?cpath='+ mp4path
+
+        fetch(fpath, {method: 'POST'})
+          .then(function(response) {
+            if(response.ok) {
+              console.log('Click was recorded');
+              return;
+            }
+            throw new Error('Request failed in /clicked');
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
+        })
       .catch( ( err ) => {
           console.log('play failed '+ err)
-
       })
-      
-
   }    
-
 }
-
-
 // Handlebars helperS
 // substr to decorate string
 

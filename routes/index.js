@@ -3,11 +3,15 @@ var router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
+
 const subjectsData = require('../models/subject');
+const User = require('../models/user');
+
+const log = (message) => {console.log(message)}
 // const videosPath = path.join(__dirname, '../videos');
 
 // Get Homepage
-router.get('/', ensureAuthenticated, function(req, res) {
+router.get('/', function(req, res) {
 	  
     res.redirect('/courses/listree');
 });
@@ -18,7 +22,7 @@ router.get('/video', function(req, res) {
     // eg. <video id="videoPlayer" controls>
     // <source src="http://localhost:3000/video" type="video/mp4"></video>
 
-        let vpath = req.query.path;
+    let vpath = req.query.path;
 
     filename = vpath.substring(vpath.indexOf('videos'))
     // stream file using fs
@@ -26,7 +30,7 @@ router.get('/video', function(req, res) {
     const fileSize = stat.size
     const range = req.headers.range
     if (range) {
-        console.log('range: ',range)
+       //  console.log('range: ',range)
         const parts = range.replace(/bytes=/, "").split("-")
         const start = parseInt(parts[0], 10)
         const end = parts[1] 
@@ -51,6 +55,30 @@ router.get('/video', function(req, res) {
       fs.createReadStream(path).pipe(res)
     }
   });
+
+// add a document to the DB collection recording the vido click event
+router.post('/clicked', (req, res) => {
+  cpath = req.query.cpath;
+
+  const click = {
+    path: cpath,
+    act_date: new Date()
+  };
+  console.log(req.user);
+  console.log('cpath: ' + cpath);
+
+  User.update(
+    {_id: req.user._id },
+    {$push: {'activity':  click }},
+    function(err, numberAffected, rawResponse) {
+      //handle it
+      if (err) throw err;
+      log('result',rawResponse,numberAffected);
+     }
+  );
+  
+
+});
   
 
 function ensureAuthenticated(req, res, next){

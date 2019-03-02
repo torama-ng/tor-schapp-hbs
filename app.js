@@ -1,5 +1,5 @@
 const hbs = require('handlebars');
-
+hbs.registerHelper("equal", require("handlebars-helper-equal"))
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -76,11 +76,24 @@ hbs.registerHelper('formatMe', function(txt) {
 
   txt = path.basename(txt,'.mp4');
   // console.log(txt);
+  
   txt = txt.replace("%", "");
+  txt = txt.replace("-", " ");
+  txt = txt.replace("_", " ");
+  txt = txt.replace(",", " ");
+  txt = txt.replace("  ", " ");
+  txt = txt.replace("   ", " ");
+  
   // console.log(txt);
-  txt =  decodeURIComponent(txt) ;
-  return txt
-  // return txt.substring(0, 40);
+//   txt =  decodeURIComponent(txt) ;
+  txt = txt.replace("-", " ");
+  return titleCase(txt);
+
+  function titleCase(str) {
+    return str.toLowerCase().split(' ').map(function(word) {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+  }
 
 });
 
