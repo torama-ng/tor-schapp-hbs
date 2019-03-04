@@ -1,5 +1,6 @@
 *.mp4
 videos/
+dist/
 node_modules/
 *.webm
 *.mp3
