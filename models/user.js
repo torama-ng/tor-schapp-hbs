@@ -17,10 +17,10 @@ var UserSchema = mongoose.Schema({
 		type: String
 	},
 
-    activity: [{
-        path: String,
-        duration: Number,
-        act_date: { type: Date, default: Date.now },
+        activity: [{
+          path: String,
+          duration: Number,
+          act_date: { type: Date, default: Date.now },
       
 	}],
 	phone1: String,
