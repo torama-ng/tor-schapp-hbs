@@ -35,8 +35,11 @@
        
         <div class="col-md-4">
             <h5 id="{{title}}"> {{title}} Play List </h5>
-            <div class="card rside bg-dark text-white mb-1" onclick='playMe("{{vpath}}")'>
-         
+            <div class="card rside bg-dark text-white mb-1" onclick='playMe("{{vpath}}")'  >
+                <video muted id="video1" onmouseover="this.play()" onmouseout="this.pause()">
+                    <source src="/images/thumbvideo/{{formatMe filename}}-video-.mp4" type="video/mp4">    
+                        Your browser does not support HTML5 video.
+                </video>
                 <img class="card-img" src="/images/thumbnail/{{formatImg filename}}-thumbnail-650x350-0001.png" alt="Card image">
                 <div class="card-body bg-light text-dark">
                     <p class="card-title txt-format text-muted ">{{formatMe filename}}</p>
