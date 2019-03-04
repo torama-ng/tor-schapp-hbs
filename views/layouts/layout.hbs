@@ -25,70 +25,74 @@
     </head>
 
     <body >
+        
+    <nav class="navbar navbar-expand-lg  navbar-dark fixed-top  bg-primary ">
         <div class="container">
-        <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-            <a href="/" class="navbar-brand"><span class="fas fa-code  fa-lg"></span> TORAMA</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
-                    {{#if user}}
+                <a href="/" class="navbar-brand"><span class="fas fa-code  fa-lg"></span> TORAMA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a href="/courses/listree" class="nav-link">List Courses</a>
+                            <a href="/" class="nav-link">Home</a>
                         </li>
+                        {{#if user}}
+                            <li class="nav-item">
+                            <a href="/courses/listree" class="nav-link">List Courses</a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="/users/listusers" class="nav-link">List Users</a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="/users/userform" class="nav-link"><i class="fas fa-user-edit"></i>edit user</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a href="/users/logout" class="nav-link">Logout</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"
+                                data-toggle="dropdown">Video Categories</a>
+                                <div class="dropdown-menu">
+                                    <a href="/nodejs" class="dropdown-item">nodejs</a>
+                                    <a href="/courses/bootstrap" class="dropdown-item">Bootstrap</a>
+                                    <a href="/courses/handlebars" class="dropdown-item">Handlebars</a>
+                                    <a href="/courses/javascript" class="dropdown-item">Javascript</a>
+                                    <a href="/courses/mongod" class="dropdown-item">Mongodb</a>
+                                    <a href="/courses/uploadv" class="dropdown-item">Uploads</a>
+                                    <a href="/courses/Vue" class="dropdown-item">Vuejs</a>                        
+                                    <a href="/courses/react" class="dropdown-item">React</a>
+                                    <a href="/courses/angular" class="dropdown-item">Angular</a>                        
+                                    <a href="/courses/html" class="dropdown-item">HTML</a>
+                                    <a href="/courses/css" class="dropdown-item">css/sass</a>
+                                    <a href="/courses/linux" class="dropdown-item">Linux</a>
+                                    <a href="/courses/python" class="dropdown-item">Python</a>
+                                    <a href="/courses/bash" class="dropdown-item">Bash</a>  
+                                    <a href="/courses/crypto" class="dropdown-item">Crypto</a>
+                                    <a href="/courses/usermgt" class="dropdown-item">User Mgt</a>                        
+                                </div>
+                            </li>
+                
+                        {{else}}
                         <li class="nav-item">
-                        <a href="/users/listusers" class="nav-link">List Users</a>
+                            <a href="/users/login" class="nav-link">Login</a>
                         </li>
                         
-                        <li class="nav-item">
-                            <a href="/users/logout" class="nav-link">Logout</a>
-                        </li>
                         
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"
-                            data-toggle="dropdown">Video Categories</a>
-                            <div class="dropdown-menu">
-                                <a href="/nodejs" class="dropdown-item">nodejs</a>
-                                <a href="/courses/bootstrap" class="dropdown-item">Bootstrap</a>
-                                <a href="/courses/handlebars" class="dropdown-item">Handlebars</a>
-                                <a href="/courses/javascript" class="dropdown-item">Javascript</a>
-                                <a href="/courses/mongod" class="dropdown-item">Mongodb</a>
-                                <a href="/courses/uploadv" class="dropdown-item">Uploads</a>
-                                <a href="/courses/Vue" class="dropdown-item">Vuejs</a>                        
-                                <a href="/courses/react" class="dropdown-item">React</a>
-                                <a href="/courses/angular" class="dropdown-item">Angular</a>                        
-                                <a href="/courses/html" class="dropdown-item">HTML</a>
-                                <a href="/courses/css" class="dropdown-item">css/sass</a>
-                                <a href="/courses/linux" class="dropdown-item">Linux</a>
-                                <a href="/courses/python" class="dropdown-item">Python</a>
-                                <a href="/courses/bash" class="dropdown-item">Bash</a>  
-                                <a href="/courses/crypto" class="dropdown-item">Crypto</a>
-                                <a href="/courses/usermgt" class="dropdown-item">User Mgt</a>                        
-                            </div>
+                        <li class="nav-item">
+                            <a href="/users/register" class="nav-link">Register</a>
                         </li>
-               
-                    {{else}}
-                    <li class="nav-item">
-                        <a href="/users/login" class="nav-link">Login</a>
-                    </li>
-                    
-                    
-                    <li class="nav-item">
-                        <a href="/users/register" class="nav-link">Register</a>
-                    </li>
-                    {{/if}}
-                </ul>  
-            </div>
- 
-        </nav>
-    </div>
-    <main role="main" class="container">
+                        {{/if}}
+                    </ul>  
+                </div>
+        </div>
+    </nav>
+    
+    <main role="main" class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 {{# if user}}

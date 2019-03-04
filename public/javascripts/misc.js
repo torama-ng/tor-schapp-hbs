@@ -1,5 +1,6 @@
 
 
+
 // Set Video Duration in proper place
 
 function setDuration(indx) {  
@@ -103,18 +104,22 @@ function playMe(mpath)  {
       console.log(`sublen ${sublen}`)
       // extract the mp4 file path from the full path
       let url = mp4path.substring(sublen, mp4len)
+      // add thumbnail preview, #t=0.5 to url
+      
+      url = url + '#t=0.5';
+      // create thumbnail file
+      
+      thumbCreate(mp4path);
+
       console.log(`url ${url}`)
+
       let video = document.getElementById('videoid');  
       let videotext = document.getElementById('videotitle');
       
       videotext.innerText = url.substring(0, url.lastIndexOf('.'));
 
-      // var source = document.createElement('source');
-
-      // source.setAttribute('src', encodeURI(url));
-      // video.appendChild(source);
-
-      video.src = encodeURI(url);
+      // video.src = encodeURI(url);
+      video.src = url;
       video.load();
       
       video.play()
@@ -145,3 +150,20 @@ function playMe(mpath)  {
 // Handlebars helperS
 // substr to decorate string
 
+function thumbCreate(mp4file) {
+  vpath = '/courses/videothumb?v=' + mp4file;
+  console.log (vpath);
+  fetch(vpath, {method: 'GET'})
+    .then(function(response) {
+      if(response.ok) {
+        console.log('thumpnail was created');
+        return;
+      }
+      throw new Error('Request failed in /videothumb');
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+
+}

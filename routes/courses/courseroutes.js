@@ -59,11 +59,12 @@ router.post('/play',(req,res,next) => {
     else return res.status(404).send('vpath not good')
     
     
-    // let filename = req.body.filename;
+    let filename2 = path.basename(filename,'.mp4')
 
     res.render('playview', { 
         title: categName,
         filename,
+        filename2,
         vpath,
         files:tree.children
         
@@ -127,6 +128,33 @@ router.post('/treeload', (req,res,next) => {
     
     })
     res.redirect('/courses/listree');
+    
+})
+
+router.get('/videothumb', ensureAuthenticated, (req,res,next) => {
+    // create video thumbnail of given video
+    mp4file = req.query.v;
+    
+    const ThumbnailGenerator = require('video-thumbnail-generator').default;
+    tpath = path.join(__dirname,'../../public/images/thumbnail')
+    const tg = new ThumbnailGenerator({
+        sourcePath: mp4file,
+        thumbnailPath: tpath,
+        tmpDir: '/tmp' //only required if you can't write to /tmp/ and you need to generate gifs
+    });
+    
+    
+    tg.generateOneByPercent(90,{size:'650x350'})
+    .then ( (err,result) => {
+        if (err) throw err;
+        console.log(result);
+    
+    })
+    .catch ((err)=>{
+        console.log(err);
+    })
+          
+    
     
 })
 

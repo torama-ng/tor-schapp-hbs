@@ -1,0 +1,70 @@
+<h2 class="page-header">Edit User Details for {{user.name}}</h2>
+
+<form method="post" action="/users/useredit">
+   <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" placeholder="Name" name="name" value="{{user.name}}">
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" placeholder="Username" name="username" value="{{user.username}}">
+  </div>
+   <div class="form-group">
+    <label>Email</label>
+    <input type="email" class="form-control" placeholder="Email" name="email" value="{{user.email}}">
+  </div>
+  
+  
+   <div class="form-group">
+    <label>Phone 1</label>
+    <input type="text" class="form-control" placeholder="Phone 1" name="phone1" value="{{user.phone1}}">
+    <label>Phone 2</label>
+    <input type="text" class="form-control" placeholder="Phone 2" name="phone2" value="{{user.phone2}}">
+    
+  </div>
+  
+
+   <div class="form-group">
+        <label>Address</label>
+        <input type="text" class="form-control" placeholder="street" name="street" value="{{user.address.street}}">
+        
+        <input type="text" class="form-control" placeholder="city" name="city" value="{{user.address.city}}">
+        <input type="text" class="form-control" placeholder="state" name="state" value="{{user.address.state}}">
+        
+        <input type="text" class="form-control" placeholder="zipcode" name="zipcode" value="{{user.address.zipcode}}">
+
+        <div class="form-group">
+            <label for="sel1">Select Country:</label>
+            <select class="form-control" id="country" name="country">
+                {{#each countries}}
+                    {{#if_eq this.code "NG"}}
+                        <option value="{{this.code}}" selected>{{this.name}}</option>
+                    {{else}}
+                        <option value="{{this.code}}">{{this.name}}</option>
+                    {{/if_eq}}
+
+                
+                {{/each}}
+            </select>
+        </div>
+  </div>
+
+   <div class="form-group">
+    <label>Reference</label>
+    <input type="text" class="form-control" placeholder="ref name" name="ref_name" value="{{user.reference.name}}">
+    <input type="text" class="form-control" placeholder="ref phone" name="ref_phone" value="{{user.reference.phone}}">
+    <input type="text" class="form-control" placeholder="ref email" name="ref_email" value="{{user.reference.email}}">
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" placeholder="Password" name="password">
+  </div>
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <input type="password" class="form-control" placeholder="Password2" name="password2">
+  </div>
+
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

@@ -22,7 +22,37 @@ var UserSchema = mongoose.Schema({
         duration: Number,
         act_date: { type: Date, default: Date.now },
       
-    }]
+	}],
+	phone1: String,
+	phone2: String,
+	address: {
+		street: String,
+		city: String,
+		state: String,
+		zipcode: String,
+		country:String
+	},
+	reference: {
+		name: String,
+		phone: String,
+		email:String
+	},
+	start_date: Date,
+	end_date: Date,
+	qualifications: [{
+		school:String,
+		diploma:String,
+		subject:String,
+		date_obtained:Date
+	}],
+	work_experience: [{
+		place:String,
+		roles:String,
+		start_year:Date,
+		end_year:Date
+
+	}]
+
 	
 });
 

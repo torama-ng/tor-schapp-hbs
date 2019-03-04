@@ -65,29 +65,48 @@ app.set('view engine', 'hbs');
 hbs.registerHelper("equal", require("handlebars-helper-equal"))
 
 hbs.registerHelper('if_eq', function(a, b, opts) {
-  if (a == b) {
+  if (a === b) {
     return opts.fn(this);
   } else {
     return opts.inverse(this);
   }
 });
 
-hbs.registerHelper('formatMe', function(txt) {
+hbs.registerHelper('formatImg', function(txt) {
+  // remove .mp4
+  if (txt) {
+    return path.basename(txt.trim(),'.mp4');
+  }
+  else {
+    console.log('formatImg: txt is null')
+  }
+  
+  // console.log(txt);
+})
 
-  txt = path.basename(txt,'.mp4');
+hbs.registerHelper('formatMe', function(txt) {
+  if (txt){
+    txt = path.basename(txt.trim(),'.mp4');
+
+    txt = txt.replace("%", "");
+    txt = txt.replace("\n", "");
+    txt = txt.replace("-", " ");
+    txt = txt.replace("_", " ");
+    txt = txt.replace(",", " ");
+    txt = txt.replace("  ", " ");
+    txt = txt.replace("   ", " ");
+    
+    // console.log(txt);
+  //   txt =  decodeURIComponent(txt) ;
+    txt = txt.replace("-", " ");
+    return titleCase(txt);
+  }
+  else{
+    console.log ('formatMe: path needs to be not null');
+    return "";
+  }
   // console.log(txt);
   
-  txt = txt.replace("%", "");
-  txt = txt.replace("-", " ");
-  txt = txt.replace("_", " ");
-  txt = txt.replace(",", " ");
-  txt = txt.replace("  ", " ");
-  txt = txt.replace("   ", " ");
-  
-  // console.log(txt);
-//   txt =  decodeURIComponent(txt) ;
-  txt = txt.replace("-", " ");
-  return titleCase(txt);
 
   function titleCase(str) {
     return str.toLowerCase().split(' ').map(function(word) {

@@ -1,11 +1,21 @@
 
+<style>
+    .txt-format {
+        white-space: nowrap; 
+        width: 300px; 
+        overflow: hidden;
+        text-overflow:ellipsis;
+    }
+
+</style>
+
 {{#if user}}
     
     <div class="row container-fluid  " >
        <div class="col-md-8">
            <div class="card">
-                <video class="bd-placeholder-img card-img-top" id="videoid"
-                    controls="controls">
+                <video class="bd-placeholder-img card-img-top" id="videoid" poster="/images/thumbnail/{{filename2}}-thumbnail-650x350-0001.png"
+                    controls="controls"  preload="metadata" >
                      <source  src="/video?path={{vpath}}" type="video/mp4">
                     
                     Your browser does not support video html 5 video tag
@@ -25,7 +35,28 @@
        
         <div class="col-md-4">
             <h5 id="{{title}}"> {{title}} Play List </h5>
-            
+            <div class="card rside bg-dark text-white mb-1" onclick='playMe("{{vpath}}")'>
+         
+                <img class="card-img" src="/images/thumbnail/{{formatImg filename}}-thumbnail-650x350-0001.png" alt="Card image">
+                <div class="card-body bg-light text-dark">
+                    <p class="card-title txt-format text-muted ">{{formatMe filename}}</p>
+                    <small class="card-text txt-format">Description</small>
+                    <small class="card-text">Duration</small>
+                </div>
+            </div>
+            <hr>
+            {{#each files}}   
+            <div class="card rside bg-dark text-white mb-1" onclick='playMe("{{this.path}}")'>
+         
+                <img class="card-img" src="/images/thumbnail/{{formatImg this.name}}-thumbnail-650x350-0001.png" alt="Card image">
+                <div class="card-body bg-light text-dark">
+                    <p class="card-title txt-format">{{formatMe this.name}}</p>
+                    <small class="card-text txt-format">Description</small>
+                    <small class="card-text">Duration</small>
+                </div>
+            </div>
+            {{/each}}
+            <!--
                 <div class="card rside text-white bg-primary mb-1 " onclick='playMe("{{vpath}}")'>
                     <div class="card-header">{{@index}}</div>
                     <div class="card-body">
@@ -46,7 +77,7 @@
                             </div>
                         </div>
                    
-                {{/each}}
+                {{/each}} -->
         </div>
     </div>
         

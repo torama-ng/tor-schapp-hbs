@@ -1,4 +1,18 @@
 
+ <style>
+     .smalltext {
+        
+        color: white !important; 
+        
+     }
+     .lboxsmall {
+         left: 10px;
+     }
+     .rboxsmall{
+        left: 10px;
+     }
+     
+ </style>
  {{#each children}}
                 
                 <li id="mylist">
@@ -10,31 +24,25 @@
                     {{#equal this.type 'file'}}
                     <div class="row">
 
-                        <div class="col-md-12 bg-warning border rounded p-2 m-1 filediv" >
-                            <span >
-                                <small>{{this.name}}</small>
-                            </span>
-                                <!-- Call route to show all videos in this category-->
-                            <form action="/courses/play" method="post" >
-                                <input type="hidden" name="path" value="{{this.path}}">
-                                <input type="hidden" name="filename" value="{{this.name}}">
-                                <button class="btn btn-primary "> 
-                                    Play Video
-                                </button>
-                            </form>
-                            <!-- 
-                                <a href="" class="list-group-item clearfix">
-                                    <div class="pull-left">
-                                        <h4 class="list-group-item-heading" id="videotitle">
-                                            Title
-                                        </h4>
-                                        <p class="list-group-item-text">parag text</p>
-                                    </div>
-                                    <span class="pull-right">
-                                        <img src="/images/school/addition.png" alt="image" class="img-responsive" style="max-height: 50px;">
-                                    </span>    
-                                </a>
-                            -->
+                        <div class="col-md-6 bg-warning border rounded  filediv p-1 m-1 " >
+                            <div class="row">
+                                <div class="col-md-6 p-1 m-1 border rounded lboxsmall">
+                                    <img class="card-img img-fluid mx-auto" src="/images/thumbnail/{{formatImg this.name}}-thumbnail-650x350-0001.png" alt="Card image">
+                                </div>
+                                <div class="col-md-5 m-1 p-1 border rounded rboxsmall">
+                                     <h6 class="bg-danger text-left">{{formatMe this.name}}</h6>
+                         
+                                        <!-- Call route to show all videos in this category-->
+                                    <form action="/courses/play" method="post" >
+                                        <input type="hidden" name="path" value="{{this.path}}">
+                                        <input type="hidden" name="filename" value="{{this.name}}">
+                                        <button class="btn btn-primary "> 
+                                            Play Video
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                               
 
                         </div>
                         
