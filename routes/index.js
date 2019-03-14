@@ -16,6 +16,14 @@ router.get('/', function(req, res) {
     res.redirect('/courses/listree');
 });
 
+router.get('/search',(req,res,next) => {
+  v = trim(req.query.v);
+  fp = '/courses/jsontree';
+  fetch('fp')
+  .then(res => res.json())
+  .then(json => console.log(json));
+})
+
 // stream Video
 router.get('/video', function(req, res) {
     // this creates a stream that can then be added to html video tag as src.

@@ -16,7 +16,7 @@
     document.getElementById('mybt').addEventListener('click',getText);
 
     function getText(){
-        fetch('file://README.md')
+        fetch('http://localhost:3000/courses/listree')
         .then((res)=>{
             return res.text()
         })

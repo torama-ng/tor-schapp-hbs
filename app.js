@@ -28,22 +28,6 @@ const apiroutes = require('./routes/api/apiroutes');
 const torplay = require('./routes/torplay');
 const routes = require('./routes/index');
 const users = require('./routes/users');
-/*
-const nodejs = require('./routes/nodejs');
-const mongod = require('./routes/mongod');
-const uploadv = require('./routes/uploadv');
-const javascript = require('./routes/javascript');
-const html = require('./routes/html');
-const usermgt = require('./routes/usermgt');
-const css = require('./routes/css');
-const bootstrap = require('./routes/bootstrap');
-const handlebars = require('./routes/handlebars');
-const linux = require('./routes/linux');
-const react = require('./routes/react');
-const vue = require('./routes/vue');
-const angular = require('./routes/angular');
-const bash = require('./routes/bash'); 
-*/
 // Init App
 var app = express();
 
@@ -59,6 +43,8 @@ app.engine('hbs', exphbs({
   
 app.set('view engine', 'hbs');
 
+// set Json options
+app.set('json spaces', 40);
 //Handlebars Partial
 
 // Handlebars helpers

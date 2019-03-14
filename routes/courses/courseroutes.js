@@ -26,6 +26,18 @@ const options = {
     extensions: [ 'mp4' ]
 };
 
+router.get('/jsontree',(req,res,next) => {
+    subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
+        if (err) return res.status(404).send('Error Encountered');
+    if (children) {
+            
+            res.json(children);        
+        }
+    })
+})
+
+
+
 router.get('/listree',(req,res,next) => {
     subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
         if (err) return res.status(404).send('Error Encountered');
