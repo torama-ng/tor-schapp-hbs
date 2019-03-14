@@ -156,7 +156,7 @@ router.get('/videothumb', ensureAuthenticated, (req,res,next) => {
     });
     
     
-    tg.generateOneByPercent(90,{size:'650x350'})
+    tg.generateOneByPercent(0.1,{size:'650x350'})
     .then ( (err,result) => {
         if (err) throw err;
         console.log(result);
