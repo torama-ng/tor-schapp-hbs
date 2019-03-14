@@ -5,7 +5,7 @@ const path = require("path");
 const fetch = require('node-fetch');
 const dree = require('dree')
 const trim = require('deep-trim-node');
-
+var os = require('os')
 const subjectsData = require('../../models/subject');
 const subjectsDree = require('../../models/subjectdree');
 
@@ -27,11 +27,33 @@ const options = {
 };
 
 router.get('/jsontree',(req,res,next) => {
+    
     subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
         if (err) return res.status(404).send('Error Encountered');
     if (children) {
-            
-            res.json(children);        
+        
+        function getKeyValues(data) {
+            let q = [];    
+            if (data == null ) return "";
+            if (typeof data != 'object') return ""
+
+            if (data.type === "file"){
+                q.push(data.name); 
+            }
+            else if (data.type === "directory") {
+                for (var i=0; i< (data.children).length; i++) {
+                     q.push(getKeyValues(data.children[i]))
+                }
+            }
+            return q.join(os.EOL); // returns a string
+        }
+        
+        var qq = getKeyValues(children[0])
+        //console.log(qq);
+          //  res.redirect('/courses/listree') 
+        res.json(qq);        
+        
+        
         }
     })
 })
@@ -156,7 +178,7 @@ router.get('/videothumb', ensureAuthenticated, (req,res,next) => {
     });
     
     
-    tg.generateOneByPercent(0.1,{size:'650x350'})
+    tg.generateOneByPercent(90,{size:'650x350'})
     .then ( (err,result) => {
         if (err) throw err;
         console.log(result);

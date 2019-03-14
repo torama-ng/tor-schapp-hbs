@@ -11,6 +11,7 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
+var cors = require('cors');
 
 // Connect to DB
 const db = require('./config/keys').mongoURI;
@@ -31,6 +32,7 @@ const users = require('./routes/users');
 // Init App
 var app = express();
 
+
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', exphbs({
@@ -40,7 +42,10 @@ app.engine('hbs', exphbs({
     defaultLayout:'layout',
 
   }));
-  
+
+// cors
+app.use(cors());
+
 app.set('view engine', 'hbs');
 
 // set Json options
