@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 
 const subjectsData = require('../models/subject');
 const User = require('../models/user');
+const axios = require('axios');
 
 const log = (message) => {console.log(message)}
 // const videosPath = path.join(__dirname, '../videos');
@@ -20,41 +21,31 @@ router.get('/search',(req,res,next) => {
   var v;
   if (req.query.v)
     v = (req.query.v).trim();
-  let result = {}
-  let data
-  var axios = require('axios');
+  fetch('http://localhost:3000/courses/jsontree')
+	.then ((res)=>(
+	   res.json() 
+	))
+	.then ((data) => {
+	   console.log(data[0])
+		res.send(data[0])
+	})
+	  /*
   axios.get('http://localhost:3000/courses/jsontree',{
     params: {
       v: v
     }
   })
   .then(function (response) {
-    // console.log(response);
-    // result = response;
-    data = getKeyValues(response)  
+    //console.log(Object.keys(response.data));
+    // console.log( Object.keys(response));
+    // console.log( typeof response.request);
+    console.log( response);
+     data = response;
   })
   .catch(function (error) {
     console.log(error);
   });
-  
-  console.log(data)
-  res.send(data)
-  
-  function getKeyValues(data) {
-    var q = [];
-    var keys = Object.keys(data);
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      var value = data[key];
-      if (value == null) {
-        q.push(key + "=''");
-      } else if (typeof value == "object"){
-        q.push(getKeyValues(value));
-      }
-    }
-    return q.join(",");
-  }
-  
+ */ 
 })
 
 // stream Video

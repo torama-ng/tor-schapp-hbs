@@ -26,32 +26,44 @@ const options = {
     extensions: [ 'mp4' ]
 };
 
+let dstr = ""; 
+let qq = [];
+let q = []
 router.get('/jsontree',(req,res,next) => {
-    
+   var k = 0; 
     subjectsDree.find({}).sort({name: 'asc'}).exec((err, children) => {    
         if (err) return res.status(404).send('Error Encountered');
     if (children) {
-        
         function getKeyValues(data) {
-            let q = [];    
-            if (data == null ) return "";
-            if (typeof data != 'object') return ""
-
-            if (data.type === "file"){
-                q.push(data.name); 
+		++k;
+		var is_thousand = !(k%1000);
+		if (is_thousand) console.log(k);
+            if (data == null ) return dstr;
+            if (typeof data != 'object') return dstr;
+		
+	    if (k >=100000) return;
+	    else if (data.type === "file"){
+                q.push( data.name); 
             }
-            else if (data.type === "directory") {
+            else if (data.type === "directory" ) {
                 for (var i=0; i< (data.children).length; i++) {
-                     q.push(getKeyValues(data.children[i]))
+		    if (is_thousand)
+                       setTimeout(getKeyValues(data.children[i]),0)
+		    else
+                       getKeyValues(data.children[i])
+
                 }
             }
-            return q.join(os.EOL); // returns a string
+            return q; // returns array
         }
-        
-        var qq = getKeyValues(children[0])
-        //console.log(qq);
+
+     //   children.forEach( (child) => {
+           qq = []	
+        	qq.push(getKeyValues(children[0]))
+//	}) 
+       //	console.log(qq);
           //  res.redirect('/courses/listree') 
-        res.json(qq);        
+        return res.json(qq);        
         
         
         }
