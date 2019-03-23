@@ -1,5 +1,6 @@
 *.mp4
 public/images/thumbnail/
+dist/images/thumbnail
 public/images/videothumb/
 videos/
 dist/
